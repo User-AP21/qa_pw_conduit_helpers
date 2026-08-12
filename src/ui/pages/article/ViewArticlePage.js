@@ -4,6 +4,15 @@ export class ViewArticlePage {
   constructor(page) {
     this.page = page;
     this.articleTitleHeader = page.getByRole('heading');
+    this.editArticleButton = page.getByRole('link', 
+      { name: ' Edit Article' }).nth(1);
+    this.articleTag = page.locator('ul.tag-list > li');
+  }
+
+  async clickEditArticleButton() {
+    await test.step(`Click 'Edit Article' button`, async () => {
+    await this.editArticleButton.click();
+    });
   }
 
   async assertArticleTitleIsVisible(title) {
@@ -17,4 +26,19 @@ export class ViewArticlePage {
       await expect(this.page.getByText(text)).toBeVisible();
     });
   }
-}
+
+
+  async assertArticleTagIsVisible(tags) {
+    await test.step(`Assert the article has tags`, async () => {
+      await expect(this.articleTag).toContainText(tags);
+    });
+  }
+
+
+  async assertArticleTagIsNotVisible() {
+    await test.step(`Assert the article hasn't tags`, async () => {
+      await expect(this.articleTag).toBeHidden();
+    });
+  }
+
+  }

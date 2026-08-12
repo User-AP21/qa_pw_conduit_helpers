@@ -3,6 +3,8 @@ import { generateNewUserData } from '../../src/common/testData/generateNewUserDa
 import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
 import { createNewArticleWithTags, createNewArticleWithoutTags } from '../../src/ui/actions/article/createNewArticle';
+import { addTagToExistingArticleWithoutTags, addTagToExistingArticleWithTags } from '../../src/ui/actions/article/editArticle';
+
 
 test.beforeEach(async ({ page }) => {
   const user = generateNewUserData();
@@ -10,16 +12,18 @@ test.beforeEach(async ({ page }) => {
 
 });
 
-test.describe('Create an article with required fields', () => {
-
-test('Create an article without tags', async ({ page }) => {
+test.describe('Add tags', () => {
+test('Add the tag for the existing article without tags', async ({ page }) => {
   const article = generateNewArticleData();
   await createNewArticleWithoutTags(page, article);
+  await addTagToExistingArticleWithoutTags(page, article);
+  
 });
 
-test('Create an article with tags', async ({ page }) => {
+test('Add the tag for the existing article with tags', async ({ page }) => {
   const article = generateNewArticleData(3);
   await createNewArticleWithTags(page, article);
+  await addTagToExistingArticleWithTags(page, article);
+  
 });
-
 });
