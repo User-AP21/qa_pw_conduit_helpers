@@ -20,7 +20,8 @@ export class EditArticlePage {
 
   async clickUpdateButton() {
     await test.step(`Click 'Update Article' button`, async () => {
-    await this.updateButton.click();
+      await this.updateButton.click();
+      await expect(this.page).toHaveURL(/\/article\//);
     });
   }
 }
