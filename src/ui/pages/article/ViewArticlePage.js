@@ -30,7 +30,9 @@ export class ViewArticlePage {
 
   async assertArticleTagIsVisible(tags) {
     await test.step(`Assert the article has tags`, async () => {
-      await expect(this.articleTag).toContainText(tags);
+      await expect
+        .poll(() => this.articleTag.allTextContents())
+        .toEqual(expect.arrayContaining(tags));
     });
   }
 
