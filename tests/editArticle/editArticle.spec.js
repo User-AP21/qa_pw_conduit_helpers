@@ -2,19 +2,34 @@ import { test } from '@playwright/test';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
-import { createNewArticle } from '../../src/ui/actions/article/createNewArticle';
+import { createNewArticleWithoutTags } from '../../src/ui/actions/article/createNewArticle';
+import { editArticleTitleForExistingArticle, 
+  editArticleDescriptionForExistingArticle, 
+  editArticleTextForExistingArticle 
+} from '../../src/ui/actions/article/editArticle';
+
+let article;
 
 test.beforeEach(async ({ page }) => {
   const user = generateNewUserData();
-  const article = generateNewArticleData(3);
+  article = generateNewArticleData();
 
   await signUpUser(page, user);
-  await createNewArticle(page, article);
+  await createNewArticleWithoutTags(page, article);
 });
 
 
 test.describe('Edit Article', () => {
-test('Add the tag for the existing article without tags', async ({ page }) => {
- 
+test('Edit the article title for the existing article', async ({ page }) => {
+  await editArticleTitleForExistingArticle(page, article);
+});
+
+test('Edit the article description for the existing article', 
+  async ({ page }) => {
+  await editArticleDescriptionForExistingArticle(page, article);
+});
+
+test('Edit the article text for the existing article', async ({ page }) => {
+  await editArticleTextForExistingArticle(page, article);
 });
 });

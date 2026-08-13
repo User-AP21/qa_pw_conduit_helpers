@@ -6,7 +6,7 @@ export class ViewArticlePage {
     this.articleTitleHeader = page.getByRole('heading');
     this.editArticleButton = page.getByRole('link', 
       { name: ' Edit Article' }).nth(1);
-    this.articleTag = page.locator('ul.tag-list > li');
+    this.tagList = page.locator('ul.tag-list > li');
   }
 
   async clickEditArticleButton() {
@@ -30,14 +30,26 @@ export class ViewArticlePage {
 
   async assertArticleTagIsVisible(tags) {
     await test.step(`Assert the article has tags`, async () => {
-      await expect(this.articleTag).toContainText(tags);
+        await expect
+        .poll(() => this.tagList.allTextContents())
+        .toEqual(expect.arrayContaining(tags));
     });
   }
+
+ async assertTagIsRemoved(tag) {
+  await test.step(`Assert tags were removed`, async () => {
+  await expect(
+    this.tagList
+      .locator('span.tag-pill')
+      .filter({ hasText: tag })
+  ).toHaveCount(0);
+  });
+}
 
 
   async assertArticleTagIsNotVisible() {
     await test.step(`Assert the article hasn't tags`, async () => {
-      await expect(this.articleTag).toBeHidden();
+      await expect(this.tagList).toBeHidden();
     });
   }
 
