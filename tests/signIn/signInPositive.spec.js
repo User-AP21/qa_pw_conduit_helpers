@@ -11,8 +11,8 @@ test.beforeEach(async ({ page }) => {
   homePage = new HomePage(page);
 
   user = {
-    email: 'userTest64222@gmail.com',
-    password: 'userTest64222',
+    email: 'didik_1234test@gmail.com',
+    password: 'didik_1234test',
   };
 });
 

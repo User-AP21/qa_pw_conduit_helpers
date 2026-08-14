@@ -67,9 +67,9 @@ export class EditArticlePage {
     });
 }
 
-  async clickRemoveTagButton() {
+  async clickRemoveTagButton(index = 0) {
     await test.step(`Click 'Remove Tag' button`, async () => {
-    await this.removeTagButtons.nth(2).click();
+     await this.removeTagButtons.nth(index).click();
     });
   }
 

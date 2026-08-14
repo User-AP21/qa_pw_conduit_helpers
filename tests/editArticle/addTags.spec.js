@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
-import { createNewArticleWithTags, createNewArticleWithoutTags } from '../../src/ui/actions/article/createNewArticle';
+import { createNewArticle } from '../../src/ui/actions/article/createNewArticle';
 import { addTagToExistingArticleWithoutTags, addTagToExistingArticleWithTags } from '../../src/ui/actions/article/editArticle';
 
 
@@ -15,14 +15,14 @@ test.beforeEach(async ({ page }) => {
 test.describe('Add tags', () => {
 test('Add the tag for the existing article without tags', async ({ page }) => {
   const article = generateNewArticleData();
-  await createNewArticleWithoutTags(page, article);
+  await createNewArticle(page, article);
   await addTagToExistingArticleWithoutTags(page, article);
   
 });
 
 test('Add the tag for the existing article with tags', async ({ page }) => {
   const article = generateNewArticleData(3);
-  await createNewArticleWithTags(page, article);
+  await createNewArticle(page, article);
   await addTagToExistingArticleWithTags(page, article);
   
 });

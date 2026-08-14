@@ -99,7 +99,7 @@ export async function removeArticleTagForExistingArticle(page,article) {
     const viewArticlePage = new ViewArticlePage(page);
 
     await viewArticlePage.clickEditArticleButton();
-    await editArticlePage.clickRemoveTagButton();
+    await editArticlePage.clickRemoveTagButton(1);
     await editArticlePage.clickUpdateButton();
     await page.reload();
     await page.waitForTimeout(5000);

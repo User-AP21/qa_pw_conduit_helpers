@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { generateNewUserData } from '../../src/common/testData/generateNewUserData';
 import { generateNewArticleData } from '../../src/common/testData/generateNewArticleData';
 import { signUpUser } from '../../src/ui/actions/auth/signUpUser';
-import { createNewArticleWithoutTags } from '../../src/ui/actions/article/createNewArticle';
+import { createNewArticle } from '../../src/ui/actions/article/createNewArticle';
 import { editArticleTitleForExistingArticle, 
   editArticleDescriptionForExistingArticle, 
   editArticleTextForExistingArticle 
@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
   article = generateNewArticleData();
 
   await signUpUser(page, user);
-  await createNewArticleWithoutTags(page, article);
+  await createNewArticle(page, article);
 });
 
 
