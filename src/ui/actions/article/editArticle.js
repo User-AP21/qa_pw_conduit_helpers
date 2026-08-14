@@ -103,7 +103,7 @@ export async function removeArticleTagForExistingArticle(page,article) {
     await editArticlePage.clickUpdateButton();
     await page.reload();
     await page.waitForTimeout(5000);
-    await viewArticlePage.assertTagIsRemoved(article.tags);
+    await viewArticlePage.assertTagIsRemoved(article.tags[1]);
 
   });
 }
